@@ -14,4 +14,5 @@ dependencies {
     jsMainImplementation(kotlinWrappers.reactDom)
     jsMainImplementation(kotlinWrappers.tanstack.reactRouter)
     jsTestImplementation(kotlin("test"))
+    jsTestImplementation(npm("@testing-library/react", "latest"))
 }
