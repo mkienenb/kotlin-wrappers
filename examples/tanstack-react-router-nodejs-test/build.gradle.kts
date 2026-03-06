@@ -24,7 +24,11 @@ dependencies {
     jsMainImplementation(kotlinWrappers.tanstack.reactRouter)
     jsTestImplementation(kotlin("test"))
     jsTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+    jsTestImplementation(kotlinWrappers.testingLibraryReact)
+    // Why do I have to import this?
     jsTestImplementation(npm("@testing-library/react", "latest"))
+    jsTestImplementation(kotlinWrappers.testingLibraryDom)
+    jsTestImplementation(kotlinWrappers.testingLibraryUserEvent)
     jsTestImplementation(npm("global-jsdom", "latest"))
 }
 
