@@ -1,23 +1,16 @@
 package example
 
 import example.testsupport.DataTestId
-import js.promise.await
 import kotlinx.coroutines.test.runTest
 import react.create
+import testing.library.dom.EventType
+import testing.library.dom.click
+import testing.library.dom.fireEvent
 import testing.library.dom.screen
 import testing.library.react.cleanup
 import testing.library.react.render
-import testing.library.user.event.setup.UserEvent
-import testing.library.user.event.setup.userEvent
 import kotlin.test.Test
 import kotlin.test.assertNotNull
-
-// Still getting this error:
-//  Exception during run: Error: Package subpath './dist/esm/setup/index' is not defined by "exports"
-//  in .../kotlin-wrappers/examples/build/js/node_modules/@testing-library/user-event/package.json
-//  imported from .../kotlin-wrappers/examples/build/js/packages/tanstack-react-router-nodejs-test-test/kotlin/tanstack-react-router-nodejs-test-test/example/RouterTest.mjs
-
-val JS_UNDEFINED = js("undefined")
 
 class RouterTest {
     @Test
@@ -27,7 +20,7 @@ class RouterTest {
         // given
 
         // when
-        val result = render(App.create())
+        render(App.create())
 
         // then
         val indexContainer : web.dom.Element = screen.findByTestId(DataTestId.INDEX_CONTAINER)
@@ -37,9 +30,7 @@ class RouterTest {
         assertNotNull(topicsLink, "link to topics on index page")
 
         // when
-        val user : UserEvent = userEvent.setup(JS_UNDEFINED)
-        user.click(topicsLink, JS_UNDEFINED).await()
-//        fireEvent.invoke(topicsLink, Event.CLICK)
+        fireEvent[EventType.click]?.invoke(topicsLink, js("undefined"))
 
         // then
         val topicsContainer : web.dom.Element = screen.findByTestId(DataTestId.TOPICS_CONTAINER)

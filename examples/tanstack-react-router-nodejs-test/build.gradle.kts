@@ -28,7 +28,6 @@ dependencies {
     // Why do I have to import this?
     jsTestImplementation(npm("@testing-library/react", "latest"))
     jsTestImplementation(kotlinWrappers.testingLibraryDom)
-    jsTestImplementation(kotlinWrappers.testingLibraryUserEvent)
     jsTestImplementation(npm("global-jsdom", "latest"))
 }
 
