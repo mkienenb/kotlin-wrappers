@@ -24,6 +24,8 @@ dependencies {
     jsMainImplementation(kotlinWrappers.tanstack.reactRouter)
     jsTestImplementation(kotlin("test"))
     jsTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+    jsTestImplementation(kotlinWrappers.testingLibraryReact)
+    jsTestImplementation(kotlinWrappers.testingLibraryDom)
     jsTestImplementation(npm("global-jsdom", "latest"))
 }
 
