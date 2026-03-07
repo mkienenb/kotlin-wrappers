@@ -53,4 +53,37 @@ class RouterTest {
         // after each test
         cleanup()
     }
+
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage1() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage2() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage3() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage4() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage5() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage6() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage7() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage8() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage9() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage10() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage11() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage12() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage13() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage14() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage15() = shouldClickTopicsLinkAndNavigateToTopicsPage()
+    @Test
+    fun shouldClickTopicsLinkAndNavigateToTopicsPage16() = shouldClickTopicsLinkAndNavigateToTopicsPage()
 }
