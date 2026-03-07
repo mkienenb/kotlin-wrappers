@@ -2,7 +2,15 @@ package example
 
 import example.testsupport.DataTestId
 import kotlinx.coroutines.test.runTest
+import react.FC
 import react.create
+import react.use.useConstant
+import tanstack.history.CreateMemoryHistoryOpts
+import tanstack.history.createMemoryHistory
+import tanstack.react.router.Router
+import tanstack.react.router.RouterOptions
+import tanstack.react.router.RouterProvider
+import tanstack.react.router.createRouter
 import testing.library.dom.EventType
 import testing.library.dom.click
 import testing.library.dom.fireEvent
@@ -15,6 +23,30 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
 class RouterTest {
+    private fun createTestAppRouter(): Router {
+        val history = createMemoryHistory(
+            CreateMemoryHistoryOpts(
+                initialEntries = arrayOf("/"),
+                initialIndex = 0
+            ))
+
+        return createRouter(
+            RouterOptions(
+                routeTree = buildRouteTree(),
+                history = history
+            )
+        )
+    }
+
+    val TestableApp = FC {
+        val appRouter = useConstant(::createTestAppRouter)
+
+        RouterProvider {
+            router = appRouter
+        }
+    }
+
+
     @Test
     fun shouldClickTopicsLinkAndNavigateToTopicsPage() = runTest {
         // before each test
@@ -22,7 +54,7 @@ class RouterTest {
         // given
 
         // when
-        render(App.create())
+        render(TestableApp.create())
 
         // then
         val indexContainer = screen.findByTestId<HTMLElement>(DataTestId.INDEX_CONTAINER)
