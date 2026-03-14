@@ -10,6 +10,8 @@ import mui.material.karakum.plugins.*
 
 suspend fun main(args: ReadonlyArray<String>) {
     generate(args) {
+        libraryName = "@mui/material"
+
         plugins = manyOf(
             convertExoticReactTypeReferences,
             convertReactQualifiedName,
@@ -28,9 +30,13 @@ suspend fun main(args: ReadonlyArray<String>) {
             "esm/**/*.d.ts",
             "node_modules/**/*.d.ts",
         )
+        ignoreOutput = manyOf(
+            "**/index.kt",
+            "**/module.kt",
+        )
         isolatedOutputPackage = true
         moduleNameMapper = recordOf(
-            "Box.d.ts" to "@mui/material/Box",
+            "Box/Box" to "Box",
         )
         packageNameMapper = recordOf(
             "index/" to "/",
