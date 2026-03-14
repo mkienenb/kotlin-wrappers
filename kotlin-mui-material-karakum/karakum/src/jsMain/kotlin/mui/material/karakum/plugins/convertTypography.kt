@@ -1,0 +1,128 @@
+package mui.material.karakum.plugins
+
+import arrow.core.raise.nullable
+import io.github.sgrishchenko.karakum.extension.createPlugin
+import typescript.*
+
+val convertTypography = createPlugin { node, _, _ ->
+    nullable {
+        if (isVariableDeclaration(node)) {
+            val name = node.name
+            ensure(isIdentifier(name))
+            if (name.text == "Typography") {
+                """
+                external interface TypographyProps :
+                    TypographyOwnProps,
+                    react.dom.html.HTMLAttributes<web.html.HTMLSpanElement>,
+                    mui.types.PropsWithComponent
+
+                external interface TypographyOwnProps :
+                    react.PropsWithChildren,
+                    mui.system.PropsWithSx {
+                    /**
+                     * Set the text-align on the component.
+                     * @default 'inherit'
+                     */
+                    var align: TypographyAlign?
+
+                    /**
+                     * The content of the component.
+                     */
+                    override var children: react.ReactNode?
+
+                    /**
+                     * Override or extend the styles applied to the component.
+                     */
+                    var classes: TypographyClasses?
+
+                    /**
+                     * If `true`, the text will have a bottom margin.
+                     * @default false
+                     */
+                    var gutterBottom: Boolean?
+
+                    /**
+                     * If `true`, the text will not wrap, but instead will truncate with a text overflow ellipsis.
+                     *
+                     * Note that text overflow can only happen with block or inline-block level elements
+                     * (the element needs to have a width in order to overflow).
+                     * @default false
+                     */
+                    var noWrap: Boolean?
+
+                    /**
+                     * If `true`, the element will be a paragraph element.
+                     * @default false
+                     */
+                    var paragraph: Boolean?
+
+                    /**
+                     * The system prop that allows defining system overrides as well as additional CSS styles.
+                     */
+                    override var sx: mui.system.SxProps<mui.material.styles.Theme>?
+
+                    /**
+                     * Applies the theme typography styles.
+                     * @default 'body1'
+                     */
+                    var variant: mui.material.styles.TypographyVariant?
+
+                    /**
+                     * The component maps the variant prop to a range of different HTML element types.
+                     * For instance, subtitle1 to `<h6>`.
+                     * If you wish to change that mapping, you can provide your own.
+                     * Alternatively, you can use the `component` prop.
+                     * @default {
+                     *   h1: 'h1',
+                     *   h2: 'h2',
+                     *   h3: 'h3',
+                     *   h4: 'h4',
+                     *   h5: 'h5',
+                     *   h6: 'h6',
+                     *   subtitle1: 'h6',
+                     *   subtitle2: 'h6',
+                     *   body1: 'p',
+                     *   body2: 'p',
+                     *   inherit: 'p',
+                     * }
+                     */
+                    var variantMapping: dynamic
+                }
+
+                /**
+                 *
+                 * Demos:
+                 *
+                 * - [Breadcrumbs](https://mui.com/material-ui/react-breadcrumbs/)
+                 * - [Typography](https://mui.com/material-ui/react-typography/)
+                 *
+                 * API:
+                 *
+                 * - [Typography API](https://mui.com/material-ui/api/typography/)
+                 */
+                @JsName("default")
+                external val Typography: react.FC<TypographyProps>
+                """.trimIndent()
+            } else if (name.text == "typographyClasses") {
+                ""
+            } else {
+                null
+            }
+        } else if (isInterfaceDeclaration(node)) {
+            val name = node.name
+            ensure(isIdentifier(name))
+            if (name.text == "TypographyProps" ||
+                name.text == "TypographyOwnProps" ||
+                name.text == "TypographyTypeMap" ||
+                name.text == "TypographyTypeMapProps" ||
+                name.text == "TypographyPropsVariantOverrides" ||
+                name.text == "TypographyClasses") {
+                ""
+            } else {
+                null
+            }
+        } else {
+            null
+        }
+    }
+}

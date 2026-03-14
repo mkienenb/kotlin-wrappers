@@ -21,6 +21,9 @@ suspend fun main(args: ReadonlyArray<String>) {
             ignoreBoxProps,
             convertDivider,
             DividerVariantPlugin(),
+            convertTypography,
+            TypographyClassesPlugin(),
+            TypographyAlignPlugin(),
         )
 
         input = manyOf(
@@ -28,6 +31,8 @@ suspend fun main(args: ReadonlyArray<String>) {
             "*/index.d.ts",
             "*/Box.d.ts",
             "*/Divider.d.ts",
+            "*/Typography.d.ts",
+            "*/typographyClasses.d.ts",
             "ButtonBase/TouchRipple.d.ts",
         )
         ignoreInput = manyOf(
@@ -38,12 +43,22 @@ suspend fun main(args: ReadonlyArray<String>) {
             "**/index.kt",
             "**/module.kt",
             "**/dividerClasses.kt",
+            "**/typographyClasses.kt",
+            "**/TypographyOwnProps.kt",
+            "**/TypographyProps.kt",
+            "**/TypographyPropsVariantOverrides.kt",
+            "**/TypographyTypeMap.kt",
+            "**/TypographyTypeMapProps.kt",
+            "**/TypographyClasses.kt",
+            "**/TypographyClassKey.kt",
         )
         isolatedOutputPackage = true
         moduleNameMapper = recordOf(
             "Box/Box" to "Box",
             "Divider/Divider" to "Divider",
             "Divider/dividerClasses" to "Divider.classes",
+            "Typography/Typography" to "Typography",
+            "Typography/typographyClasses" to "Typography.classes",
         )
         packageNameMapper = recordOf(
             "index/" to "/",
@@ -52,6 +67,9 @@ suspend fun main(args: ReadonlyArray<String>) {
             "DividerVariant/" to "/",
             "Divider/dividerClasses/" to "/",
             "Divider.classes/" to "/",
+            "Typography/Typography/" to "/",
+            "Typography/typographyClasses/" to "/",
+            "Typography.classes/" to "/",
 
             "experimental_extendTheme/" to "experimental_extend_theme/",
 
@@ -211,6 +229,14 @@ suspend fun main(args: ReadonlyArray<String>) {
             "../dividerClasses" to ruleOf(
                 "default" to "",
                 "DividerClasses" to "",
+            ),
+            "./typographyClasses" to ruleOf(
+                "default" to "",
+                "TypographyClasses" to "",
+            ),
+            "../typographyClasses" to ruleOf(
+                "default" to "",
+                "TypographyClasses" to "",
             ),
             "../../styles" to ruleOf(
                 "Theme" to "mui.material.styles.Theme"
