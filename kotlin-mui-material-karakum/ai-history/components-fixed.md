@@ -3,5 +3,5 @@
 - [x] import mui.material.Divider
 - [x] import mui.material.DividerVariant
 - [x] import mui.material.Typography
-- [ ] import mui.material.styles.TypographyVariant
+- [x] import mui.material.styles.TypographyVariant
 - [ ] import mui.system.sx

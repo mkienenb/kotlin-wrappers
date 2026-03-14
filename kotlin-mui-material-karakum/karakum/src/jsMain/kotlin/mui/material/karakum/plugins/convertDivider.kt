@@ -20,7 +20,16 @@ val convertDivider = createPlugin { node, _, render ->
                 """
                 typealias Orientation = mui.base.Orientation
 
-                typealias DividerTextAlign = mui.system.Union /* 'center' | 'left' | 'right' */
+                sealed external interface DividerTextAlign {
+                    companion object {
+                        @JsValue("center")
+                        val center: DividerTextAlign
+                        @JsValue("right")
+                        val right: DividerTextAlign
+                        @JsValue("left")
+                        val left: DividerTextAlign
+                    }
+                }
 
                 sealed external interface DividerClasses {
                     /** Styles applied to the root element. */

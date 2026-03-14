@@ -22,6 +22,7 @@ suspend fun main(args: ReadonlyArray<String>) {
             convertDivider,
             DividerVariantPlugin(),
             convertTypography,
+            TypographyVariantPlugin(),
             TypographyClassesPlugin(),
             TypographyAlignPlugin(),
         )
@@ -68,6 +69,7 @@ suspend fun main(args: ReadonlyArray<String>) {
             "Divider/dividerClasses/" to "/",
             "Divider.classes/" to "/",
             "Typography/Typography/" to "/",
+            "styles/TypographyVariant/" to "styles/",
             "Typography/typographyClasses/" to "/",
             "Typography.classes/" to "/",
 
