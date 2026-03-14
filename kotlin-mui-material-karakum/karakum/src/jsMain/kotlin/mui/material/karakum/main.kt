@@ -13,17 +13,20 @@ suspend fun main(args: ReadonlyArray<String>) {
         libraryName = "@mui/material"
 
         plugins = manyOf(
+            renameConflictingNames,
             convertExoticReactTypeReferences,
             convertReactQualifiedName,
             convertUtilityTypes,
             convertBox,
             ignoreBoxProps,
+            convertDivider,
         )
 
         input = manyOf(
             "index.d.ts",
             "*/index.d.ts",
             "*/Box.d.ts",
+            "*/Divider.d.ts",
             "ButtonBase/TouchRipple.d.ts",
         )
         ignoreInput = manyOf(
@@ -33,14 +36,20 @@ suspend fun main(args: ReadonlyArray<String>) {
         ignoreOutput = manyOf(
             "**/index.kt",
             "**/module.kt",
+            "**/dividerClasses.kt",
         )
         isolatedOutputPackage = true
         moduleNameMapper = recordOf(
             "Box/Box" to "Box",
+            "Divider/Divider" to "Divider",
+            "Divider/dividerClasses" to "Divider.classes",
         )
         packageNameMapper = recordOf(
             "index/" to "/",
             "Box/" to "/",
+            "Divider/Divider/" to "/",
+            "Divider/dividerClasses/" to "/",
+            "Divider.classes/" to "/",
 
             "experimental_extendTheme/" to "experimental_extend_theme/",
 
@@ -79,7 +88,6 @@ suspend fun main(args: ReadonlyArray<String>) {
             "dialogContentClasses/" to "dialogContent_classes/",
             "dialogContentTextClasses/" to "dialogContentText_classes/",
             "dialogTitleClasses/" to "dialogTitle_classes/",
-            "dividerClasses/" to "divider_classes/",
             "drawerClasses/" to "drawer_classes/",
             "fabClasses/" to "fab_classes/",
             "filledInputClasses/" to "filledInput_classes/",
@@ -182,8 +190,37 @@ suspend fun main(args: ReadonlyArray<String>) {
             "@mui/types" to ruleOf(
                 ".+" to ""
             ),
-            "../OverridableComponent" to ruleOf(
-                ".+" to ""
+            "../styles/Theme" to ruleOf(
+                "default" to "mui.material.styles.Theme"
+            ),
+            "../styles" to ruleOf(
+                "Theme" to "mui.material.styles.Theme"
+            ),
+            ".." to ruleOf(
+                "Theme" to "mui.material.styles.Theme",
+                "OverridableComponent" to "",
+                "OverrideProps" to "",
+                "Orientation" to "Orientation",
+            ),
+            "./dividerClasses" to ruleOf(
+                "default" to "",
+                "DividerClasses" to "",
+            ),
+            "../dividerClasses" to ruleOf(
+                "default" to "",
+                "DividerClasses" to "",
+            ),
+            "../../styles" to ruleOf(
+                "Theme" to "mui.material.styles.Theme"
+            ),
+            "../../system" to ruleOf(
+                "SxProps" to "mui.system.SxProps"
+            ),
+            "../types" to ruleOf(
+                "Orientation" to "Orientation",
+            ),
+            "web.cssom" to ruleOf(
+                "ClassName" to "web.cssom.ClassName"
             ),
             "../styles" to ruleOf(
                 ".+" to ""
