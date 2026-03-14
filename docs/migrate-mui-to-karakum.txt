@@ -90,7 +90,7 @@ What to do next:
 
 Useful validated commands:
 - `./gradlew :kotlin-mui-material-karakum:tasks --all`
-- `./gradlew :kotlin-mui-material-karakum:generateKarakumExternals`
+- `./gradlew :kotlin-mui-material-karakum-karakum:generateKarakumExternals`
 - `./gradlew :kotlin-mui-material:compileKotlinJs`
 
 Commands to test that MUI works:
