@@ -65,6 +65,7 @@ Work already done:
 Current local changes:
 - modified `settings.gradle.kts`
 - new `kotlin-mui-material/karakum/` scaffold
+- individual working import support will be tracked in `kotlin-mui-material-karakum/ai-history/components-fixed.md`
 
 What to do next:
 1. Continue with the local Karakum approach, not the old external generator.
@@ -98,3 +99,8 @@ Commands to test that MUI works:
 cd `examples`
 ./gradlew mui-materials:jsBrowserDevelopmentExecutableDistribution
 ```
+
+For reference:
+- `kotlin-mui-material-karakum/ai-history contains past prompts for getting components working as well as chat history
+   to resolve that feature.   Each chat is in a directory named <number>-<component> where <number> is the sequential order
+   of work and <component> is the component being worked on.  For instance, Box and sx.

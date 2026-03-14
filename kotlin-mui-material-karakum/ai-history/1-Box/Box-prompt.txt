@@ -1,5 +1,5 @@
 ## Prompt 1
-Use docs/migrate-mui-to-karakum.txt as a reference.
+Use `kotlin-mui-material-karakum/ai-history/migrate-mui-to-karakum.txt` as a reference.
 
 Determine the minimum changes necessary so that running
  ```

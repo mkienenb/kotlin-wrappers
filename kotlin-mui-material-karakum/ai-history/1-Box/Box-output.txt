@@ -1,0 +1,49 @@
+Chat 'ChatTitle(text=Minimal Migration for MUI to Karakum Box Generation, isCustom=true)' (2a86bd62-2b41-4883-bf25-a34f37d6d919)
+Context:
+
+Messages: 2
+================================================================================================================================
+
+==== UserMessageImpl #1 ====
+User: 
+```plain text
+## Prompt 1
+Use docs/migrate-mui-to-karakum.txt as a reference.
+
+Determine the minimum changes necessary so that running
+ ```
+ ./gradlew :kotlin-mui-material-karakum-karakum:generateKarakumExternals
+ ```
+ generates a functionally equivalent version of
+kotlin-mui-material/src/jsMain/generated/mui/material/Box.kt in kotlin-mui-material-karakum/src/webMain/generated/mui/material/Box.kt
+
+This is mui-material 5.18.0 target.
+```
+
+Attachments:
+Attachment Name: Console Selection
+Attachments Kind: Visible
+Attachments Source: Other / SelectionChatAttachment
+Attachments Text:
+## Prompt 1
+Use docs/migrate-mui-to-karakum.txt as a reference.
+
+Determine the minimum changes necessary so that running
+ ```
+ ./gradlew :kotlin-mui-material-karakum-karakum:generateKarakumExternals
+ ```
+ generates a functionally equivalent version of
+kotlin-mui-material/src/jsMain/generated/mui/material/Box.kt in kotlin-mui-material-karakum/src/webMain/generated/mui/material/Box.kt
+
+This is mui-material 5.18.0 target.
+
+
+
+kotlin.Unit
+
+==== SimpleCompletableMessage #2 ====
+Assistant: 
+
+
+kotlin.Unit
+
