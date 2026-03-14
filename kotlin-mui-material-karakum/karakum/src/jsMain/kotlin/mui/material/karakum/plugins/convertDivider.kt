@@ -18,13 +18,9 @@ val convertDivider = createPlugin { node, _, render ->
                 ensure(typeName.text == "OverridableComponent")
 
                 """
-                external interface DividerPropsVariantOverrides
-
                 typealias Orientation = mui.base.Orientation
 
                 typealias DividerTextAlign = mui.system.Union /* 'center' | 'left' | 'right' */
-
-                typealias DividerVariant = mui.system.Union /* 'fullWidth' | 'inset' | 'middle' */
 
                 sealed external interface DividerClasses {
                     /** Styles applied to the root element. */

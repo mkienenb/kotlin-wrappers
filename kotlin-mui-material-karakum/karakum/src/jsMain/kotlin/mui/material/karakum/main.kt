@@ -20,6 +20,7 @@ suspend fun main(args: ReadonlyArray<String>) {
             convertBox,
             ignoreBoxProps,
             convertDivider,
+            DividerVariantPlugin(),
         )
 
         input = manyOf(
@@ -48,6 +49,7 @@ suspend fun main(args: ReadonlyArray<String>) {
             "index/" to "/",
             "Box/" to "/",
             "Divider/Divider/" to "/",
+            "DividerVariant/" to "/",
             "Divider/dividerClasses/" to "/",
             "Divider.classes/" to "/",
 
