@@ -135,6 +135,8 @@ include("kotlin-jszip")
 
 // Kotlin/JS: Material UI wrappers
 include("kotlin-mui-material")
+include("kotlin-mui-material-karakum")
+includeKarakum("kotlin-mui-material-karakum")
 
 // Kotlin/JS: MUI Base UI wrappers
 include("kotlin-mui-base")
