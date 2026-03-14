@@ -38,7 +38,6 @@ val convertBox = createPlugin { node, _, _ ->
          *
          * - [Box API](https://mui.com/material-ui/api/box/)
          */
-        @JsModule("@mui/material/Box")
         @JsName("default")
         external val Box: react.FC<mui.system.BoxProps>
         """.trimIndent()

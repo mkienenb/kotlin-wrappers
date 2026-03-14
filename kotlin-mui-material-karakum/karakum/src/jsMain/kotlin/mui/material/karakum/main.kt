@@ -29,6 +29,9 @@ suspend fun main(args: ReadonlyArray<String>) {
             "node_modules/**/*.d.ts",
         )
         isolatedOutputPackage = true
+        moduleNameMapper = recordOf(
+            "Box.d.ts" to "@mui/material/Box",
+        )
         packageNameMapper = recordOf(
             "index/" to "/",
             "Box/" to "/",
