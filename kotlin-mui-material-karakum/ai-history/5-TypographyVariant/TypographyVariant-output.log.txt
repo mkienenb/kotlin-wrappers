@@ -1,0 +1,32 @@
+Chat 'ChatTitle(text=Minimize Changes for Karakum TypographyVariant Generation, isCustom=true)' (3c1dc446-8d4c-4ef8-89df-e76d6eb47316)
+Context:
+
+Messages: 2
+======================================================================================================================================
+
+==== UserMessageImpl #1 ====
+User: 
+```plain text
+## Prompt 5
+Use `kotlin-mui-material-karakum/ai-history/migrate-mui-to-karakum.txt` as a reference.
+
+Determine the minimum changes necessary so that running
+ ```
+ ./gradlew :kotlin-mui-material-karakum-karakum:generateKarakumExternals
+ ```
+ generates a functionally equivalent version of
+kotlin-mui-material/src/jsMain/generated/mui/material/TypographyVariant.kt in
+kotlin-mui-material-karakum/src/webMain/generated/mui/material/TypographyVariant.kt
+
+This is mui-material 5.18.0 target.
+```
+
+
+kotlin.Unit
+
+==== SimpleCompletableMessage #2 ====
+Assistant: 
+
+
+kotlin.Unit
+

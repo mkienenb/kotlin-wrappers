@@ -1,0 +1,11 @@
+## Prompt 1
+Use `kotlin-mui-material-karakum/ai-history/migrate-mui-to-karakum.txt` as a reference.
+
+Determine the minimum changes necessary so that running
+ ```
+ ./gradlew :kotlin-mui-material-karakum-karakum:generateKarakumExternals
+ ```
+ generates a functionally equivalent version of
+kotlin-mui-material/src/jsMain/generated/mui/material/Box.kt in kotlin-mui-material-karakum/src/webMain/generated/mui/material/Box.kt
+
+This is mui-material 5.18.0 target.
