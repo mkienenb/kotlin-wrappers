@@ -1,7 +1,10 @@
 import org.jetbrains.kotlin.gradle.targets.js.testing.KotlinJsTest
+import kotlin.text.toBoolean
 
 plugins {
     id("examplesbuild.kotlin-conventions")
+    id("com.google.devtools.ksp") version "2.3.6"
+    id("io.kotest") version "6.1.7"
 }
 
 kotlin {
@@ -36,9 +39,33 @@ dependencies {
     jsTestImplementation(kotlinWrappers.testingLibraryReact)
     jsTestImplementation(kotlinWrappers.testingLibraryDom)
     jsTestImplementation(npm("global-jsdom", "28.0.0"))
+    jsTestImplementation("io.kotest:kotest-framework-engine-js:6.1.7")
 }
 
 tasks.named<KotlinJsTest>("jsNodeTest") {
     // required to make tanstack react router fire load events in mocha/node/jsdom tests
     environment("NODE_ENV", "test")
+
+    doFirst {
+        var currentClass: Class<*>? = filter.javaClass
+        var field: java.lang.reflect.Field? = null
+
+        // Search through the class hierarchy for the commandLineIncludeTestNames field
+        while (currentClass != null && field == null) {
+            try {
+                field = currentClass.getDeclaredField("commandLineIncludeTestNames")
+            } catch (_: NoSuchFieldException) {
+                currentClass = currentClass.superclass
+            }
+        }
+
+        if (field != null) {
+            field.isAccessible = true
+            val patterns = field.get(filter) as? MutableSet<*>
+            // CRITICAL: Clear the commandLineIncludeTestNames so Gradle doesn't validate
+            patterns?.clear()
+            println("Cleared command line test patterns to prevent Gradle validation")
+        }
+    }
+
 }
