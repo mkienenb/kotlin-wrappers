@@ -11,3 +11,11 @@ build/
 *.iml
 *.ipr
 *.iws
+/.tdd/scripts
+/.tdd/scripts/
+/.agents/skills
+/.agents/skills/
+/.claude
+/.claude/
+/.codex
+/mui7-surface
