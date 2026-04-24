@@ -7,7 +7,7 @@ Standalone Kotlin/JS wrappers for the scoped MUI 7 surface implemented in this d
 - Group: `org.jetbrains.kotlin-wrappers.experimental`
 - Artifact: `mui-7`
 - JS artifact: `mui-7-js`
-- Version: `7.3.10-pre.1`
+- Version: `7.3.10-pre.3`
 
 The wrapper exposes these Kotlin packages:
 
@@ -63,11 +63,21 @@ repositories {
 }
 ```
 
-Then depend on the wrapper:
+Then depend on the wrapper and keep the shared support wrappers explicit in the consuming build:
 
 ```kotlin
 dependencies {
-    implementation("org.jetbrains.kotlin-wrappers.experimental:mui-7:7.3.10-pre.1")
+    jsMainImplementation("org.jetbrains.kotlin-wrappers.experimental:mui-7:7.3.10-pre.3")
+
+    jsMainImplementation(kotlinWrappers.js)
+    jsMainImplementation(kotlinWrappers.react)
+    jsMainImplementation(kotlinWrappers.reactDom)
+    jsMainImplementation(kotlinWrappers.csstype)
+
+    webMainImplementation(npm("@emotion/react", "^11.14.0"))
+    webMainImplementation(npm("@emotion/styled", "^11.14.1"))
+    webMainImplementation(npm("react", "^19.2.5"))
+    webMainImplementation(npm("react-dom", "^19.2.5"))
 }
 ```
 
@@ -75,12 +85,12 @@ For a version catalog, the equivalent entry is:
 
 ```toml
 [libraries]
-mui7 = { module = "org.jetbrains.kotlin-wrappers.experimental:mui-7", version = "7.3.10-pre.1" }
+mui7 = { module = "org.jetbrains.kotlin-wrappers.experimental:mui-7", version = "7.3.10-pre.3" }
 ```
 
 ```kotlin
 dependencies {
-    implementation(libs.mui7)
+    jsMainImplementation(libs.mui7)
 }
 ```
 
@@ -143,7 +153,8 @@ val Screen = FC<Props> {
 
 - `mui.material.styles` is included directly, so you do not need a local `@mui/material/styles` shim.
 - The scope is intentionally narrow and only covers the APIs implemented in this module.
-- The underlying npm MUI 7 packages are declared by the published Gradle metadata, so a normal Kotlin/JS Gradle consumer should pick them up automatically.
+- `mui-7` does not re-export `kotlin-js`, `kotlin-react`, `kotlin-react-dom`, `kotlin-csstype`, `react`, `react-dom`, `@emotion/react`, or `@emotion/styled`; declare those in the consuming build.
+- The published Gradle metadata still carries the MUI 7.3.10 packages required by this wrapper surface.
 
 ## Notes For Maintainers
 
