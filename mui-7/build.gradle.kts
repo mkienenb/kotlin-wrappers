@@ -1,10 +1,11 @@
 plugins {
     id("wrappersbuild.kotlin-conventions")
+    id("io.github.turansky.seskar") version "4.40.0"
     `maven-publish`
 }
 
 group = "org.jetbrains.kotlin-wrappers.experimental"
-version = "7.3.10-pre.1"
+version = "7.3.10-pre.2"
 
 dependencies {
     jsMainApi(kotlinWrappers.js)

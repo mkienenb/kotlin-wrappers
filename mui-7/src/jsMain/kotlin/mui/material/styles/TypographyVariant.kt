@@ -1,49 +1,46 @@
 package mui.material.styles
 
-import js.reflect.unsafeCast
-
-private fun <T : Any> literal(value: String): T =
-    unsafeCast(value)
+import seskar.js.JsValue
 
 sealed external interface TypographyVariant {
-    companion object
+    companion object {
+        @JsValue("h1")
+        val h1: TypographyVariant
+
+        @JsValue("h2")
+        val h2: TypographyVariant
+
+        @JsValue("h3")
+        val h3: TypographyVariant
+
+        @JsValue("h4")
+        val h4: TypographyVariant
+
+        @JsValue("h5")
+        val h5: TypographyVariant
+
+        @JsValue("h6")
+        val h6: TypographyVariant
+
+        @JsValue("subtitle1")
+        val subtitle1: TypographyVariant
+
+        @JsValue("subtitle2")
+        val subtitle2: TypographyVariant
+
+        @JsValue("body1")
+        val body1: TypographyVariant
+
+        @JsValue("body2")
+        val body2: TypographyVariant
+
+        @JsValue("caption")
+        val caption: TypographyVariant
+
+        @JsValue("button")
+        val button: TypographyVariant
+
+        @JsValue("overline")
+        val overline: TypographyVariant
+    }
 }
-
-val TypographyVariant.Companion.h1: TypographyVariant
-    get() = literal("h1")
-
-val TypographyVariant.Companion.h2: TypographyVariant
-    get() = literal("h2")
-
-val TypographyVariant.Companion.h3: TypographyVariant
-    get() = literal("h3")
-
-val TypographyVariant.Companion.h4: TypographyVariant
-    get() = literal("h4")
-
-val TypographyVariant.Companion.h5: TypographyVariant
-    get() = literal("h5")
-
-val TypographyVariant.Companion.h6: TypographyVariant
-    get() = literal("h6")
-
-val TypographyVariant.Companion.subtitle1: TypographyVariant
-    get() = literal("subtitle1")
-
-val TypographyVariant.Companion.subtitle2: TypographyVariant
-    get() = literal("subtitle2")
-
-val TypographyVariant.Companion.body1: TypographyVariant
-    get() = literal("body1")
-
-val TypographyVariant.Companion.body2: TypographyVariant
-    get() = literal("body2")
-
-val TypographyVariant.Companion.caption: TypographyVariant
-    get() = literal("caption")
-
-val TypographyVariant.Companion.button: TypographyVariant
-    get() = literal("button")
-
-val TypographyVariant.Companion.overline: TypographyVariant
-    get() = literal("overline")

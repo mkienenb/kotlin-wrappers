@@ -13,7 +13,8 @@ Durable decisions that apply across all phases:
 - **Pinned versions**: The implementation target is `@mui/material@7.3.10`, `@mui/system@7.3.10`, `@mui/icons-material@7.3.10`, `@emotion/react@11.14.0`, `@emotion/styled@11.14.1`, `react@19.2.5`, and `react-dom@19.2.5`.
 - **Typing model**: The wrapper follows the existing pragmatic MUI wrapper style: preserve the small unions that materially help Kotlin call sites and use loose types for difficult MUI TypeScript constructs.
 - **Theming boundary**: `mui7` owns first-class `mui.material.styles` bindings so consumers can delete local styles shims; consumer-owned routing extensions layered onto `PropsWithComponent` remain outside the dependency.
-- **Verification strategy**: Each phase ends with a buildable, consumer-style proof that exercises the phase surface as it would be used from a Kotlin/JS application.
+- **Verification strategy**: Each phase ends with a buildable, consumer-style proof that exercises the phase surface as it would be used from a Kotlin/JS application. "Buildable" means both (a) `compileKotlinJs` green AND (b) the emitted klib contains real IR bodies and runtime-resolvable bindings for every public symbol the phase adds — not just metadata headers. Compile-clean is necessary but not sufficient; a string-union pseudo-enum must resolve at JS module load without a `ReferenceError`.
+- **String-union pseudo-enums**: Value unions exposed as `sealed external interface X { companion object { ... } }` MUST use Seskar's `@JsValue("…")` annotation on abstract companion vals. Hand-rolled `literal()` / `unsafeCast` extension properties compile cleanly but emit bare-global references (`get_caption(TypographyVariant)`) that fail at runtime because nothing defines `TypographyVariant` on the JS side. The Seskar compiler plugin (`io.github.turansky.seskar`) must remain applied to `mui-7/build.gradle.kts` for this pattern to produce runtime-correct IR.
 
 ---
 
@@ -98,8 +99,42 @@ Prove the full scoped surface together as a migration-ready dependency. This pha
 
 ### Acceptance criteria
 
-- [x] A single end-to-end proof compiles or runs against the full scoped surface described in the PRD.
+- [x] A single end-to-end proof compiles and the emitted klib links at runtime against the full scoped surface described in the PRD, exercising every string-union value listed in the PRD's literal set.
 - [x] The proof imports `mui.material.styles` directly and does not require a local `@mui/material/styles` shim.
 - [x] The dependency boundary is verified as intentionally narrow, with no requirement for undocumented MUI surface area.
 - [x] The released dependency shape remains aligned with the approved `./mui7-surface` package snapshot and exact version set.
 - [x] The project is ready to publish or consume as the initial MUI 7 wrapper snapshot for the target app.
+
+---
+
+## Post-mortem: the `@JsValue` / Seskar runtime-linkage fix
+
+The first delivery of Phases 1–5 passed every acceptance criterion above, yet the consumer app saw ~178 runtime test failures on mount because two string-union values (`AppBarPosition.static` in the root navigation, `TypographyVariant.caption` in a detail view) crashed with `ReferenceError` at JS load time.
+
+### Root cause
+
+Every string-union pseudo-enum was authored with the hand-rolled pattern:
+
+```kotlin
+sealed external interface TypographyVariant { companion object }
+
+val TypographyVariant.Companion.caption: TypographyVariant
+    get() = literal("caption")   // unsafeCast("caption")
+```
+
+The Kotlin/JS backend emitted each call site as `get_caption(TypographyVariant)` — a bare-global reference to the external interface's name. Nothing on the JS side defines a `TypographyVariant` object (no `@JsModule`, no runtime shim, and the external interface itself has no JS identity), so the reference resolves to `undefined` and the module fails at first dereference. The main library's `jsJar` was ~empty of runtime IR because none of the abstract externals produced linkable code.
+
+### Fix
+
+- `mui-7/build.gradle.kts` now applies `id("io.github.turansky.seskar") version "4.40.0"` directly, keeping the project self-contained instead of depending on monorepo conventions.
+- `mui-7/src/jsMain/kotlin/mui/material/Types.kt` and `mui-7/src/jsMain/kotlin/mui/material/styles/TypographyVariant.kt` moved every value **inside** the companion object, annotated with `@JsValue("…")`. Seskar rewrites each getter body to return the string literal directly, so the companion object no longer needs any JS-side identity.
+
+### Verification receipt
+
+- Fresh `mui-7-js-7.3.10-pre.1.klib` grew from a metadata-only shell to ~38 KB with real IR bodies.
+- IR strings table contains `seskarjsJsValue` annotations and per-member `PROPERTY_BACKING_FIELD` entries; the old `literal` / `unsafeCast` / `jsreflect` references are gone.
+- Every string-union value listed in `Implementation Decisions` line 57 of the PRD is exercised by `proof/src/jsMain/kotlin/mui7/proof/*.kt`.
+
+### Lesson folded back into acceptance criteria
+
+The "Verification strategy" architectural decision above was tightened to require runtime-resolvable bindings, not just compile-clean output. The "String-union pseudo-enums" decision explicitly mandates the `@JsValue` / Seskar pattern for any future additions to this wrapper.
