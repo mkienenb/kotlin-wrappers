@@ -27,11 +27,11 @@ Create the standalone `./mui-7` dependency skeleton and prove the lowest-level w
 
 ### Acceptance criteria
 
-- [ ] `./mui-7` builds as a standalone Kotlin/JS dependency with the required MUI 7 npm package boundary defined.
-- [ ] The standalone dependency is wired against the approved published package set represented by `./mui7-surface`.
-- [ ] The dependency exposes the baseline namespaces `mui.types` and `mui.system` with the shared helper types needed by later slices.
-- [ ] A consumer-style proof compiles using `mui.system.Box` and `mui.system.sx` in the same broad style as the existing app.
-- [ ] `PropsWithComponent` exists with the minimal compatibility required for consumer-owned extensions to remain viable.
+- [x] `./mui-7` builds as a standalone Kotlin/JS dependency with the required MUI 7 npm package boundary defined.
+- [x] The standalone dependency is wired against the approved published package set represented by `./mui7-surface`.
+- [x] The dependency exposes the baseline namespaces `mui.types` and `mui.system` with the shared helper types needed by later slices.
+- [x] A consumer-style proof compiles using `mui.system.Box` and `mui.system.sx` in the same broad style as the existing app.
+- [x] `PropsWithComponent` exists with the minimal compatibility required for consumer-owned extensions to remain viable.
 
 ---
 
@@ -45,11 +45,11 @@ Add the first themed material screen slice. This phase introduces direct `mui.ma
 
 ### Acceptance criteria
 
-- [ ] The dependency provides first-class `mui.material.styles.createTheme` and `mui.material.styles.ThemeProvider` bindings.
-- [ ] The styles bindings are derived from the published MUI 7.3.10 surface available in `./mui7-surface`, not inferred from older wrapper output.
-- [ ] A consumer-style proof compiles using direct `mui.material.styles` imports instead of a local styles shim.
-- [ ] `createTheme` accepts the currently used loose theme configuration pattern, including `palette`, `typography`, and `components` overrides.
-- [ ] `mui.material.Box`, `mui.material.Typography`, and the required `TypographyVariant` members support a themed screen representative of the current app.
+- [x] The dependency provides first-class `mui.material.styles.createTheme` and `mui.material.styles.ThemeProvider` bindings.
+- [x] The styles bindings are derived from the published MUI 7.3.10 surface available in `./mui7-surface`, not inferred from older wrapper output.
+- [x] A consumer-style proof compiles using direct `mui.material.styles` imports instead of a local styles shim.
+- [x] `createTheme` accepts the currently used loose theme configuration pattern, including `palette`, `typography`, and `components` overrides.
+- [x] `mui.material.Box`, `mui.material.Typography`, and the required `TypographyVariant` members support a themed screen representative of the current app.
 
 ---
 
@@ -63,11 +63,11 @@ Add the application-shell interaction slice used by the current top navigation. 
 
 ### Acceptance criteria
 
-- [ ] `Button`, `ButtonColor`, `ButtonVariant`, `AppBar`, `AppBarPosition`, and `Toolbar` support the prop patterns already used by the consumer.
-- [ ] The minimum confirmed literal values compile and behave through a consumer-style navigation example.
-- [ ] The named icons `AdminPanelSettings`, `Help`, `Person`, and `RateReview` are available in `mui.icons.material`.
-- [ ] The navigation and icon bindings are verified against the installed published icon and component declarations in `./mui7-surface`.
-- [ ] Icon usage is verified both as React components and through the existing `create()`-style invocation pattern.
+- [x] `Button`, `ButtonColor`, `ButtonVariant`, `AppBar`, `AppBarPosition`, and `Toolbar` support the prop patterns already used by the consumer.
+- [x] The minimum confirmed literal values compile and behave through a consumer-style navigation example.
+- [x] The named icons `AdminPanelSettings`, `Help`, `Person`, and `RateReview` are available in `mui.icons.material`.
+- [x] The navigation and icon bindings are verified against the installed published icon and component declarations in `./mui7-surface`.
+- [x] Icon usage is verified both as React components and through the existing `create()`-style invocation pattern.
 
 ---
 
@@ -81,10 +81,10 @@ Add the content components used by the current detail and list screens. This pha
 
 ### Acceptance criteria
 
-- [ ] `Card`, `CardContent`, `Divider`, `DividerVariant`, and `CircularProgress` are available and compile in consumer-style screen code.
-- [ ] The confirmed divider and typography value patterns used by the consumer repo are supported.
-- [ ] A representative detail-content proof compiles using cards, text, layout, and divider composition together.
-- [ ] A representative loading proof compiles with the scoped loading indicator usage.
+- [x] `Card`, `CardContent`, `Divider`, `DividerVariant`, and `CircularProgress` are available and compile in consumer-style screen code.
+- [x] The confirmed divider and typography value patterns used by the consumer repo are supported.
+- [x] A representative detail-content proof compiles using cards, text, layout, and divider composition together.
+- [x] A representative loading proof compiles with the scoped loading indicator usage.
 
 ---
 
@@ -98,8 +98,8 @@ Prove the full scoped surface together as a migration-ready dependency. This pha
 
 ### Acceptance criteria
 
-- [ ] A single end-to-end proof compiles or runs against the full scoped surface described in the PRD.
-- [ ] The proof imports `mui.material.styles` directly and does not require a local `@mui/material/styles` shim.
-- [ ] The dependency boundary is verified as intentionally narrow, with no requirement for undocumented MUI surface area.
-- [ ] The released dependency shape remains aligned with the approved `./mui7-surface` package snapshot and exact version set.
-- [ ] The project is ready to publish or consume as the initial MUI 7 wrapper snapshot for the target app.
+- [x] A single end-to-end proof compiles or runs against the full scoped surface described in the PRD.
+- [x] The proof imports `mui.material.styles` directly and does not require a local `@mui/material/styles` shim.
+- [x] The dependency boundary is verified as intentionally narrow, with no requirement for undocumented MUI surface area.
+- [x] The released dependency shape remains aligned with the approved `./mui7-surface` package snapshot and exact version set.
+- [x] The project is ready to publish or consume as the initial MUI 7 wrapper snapshot for the target app.
