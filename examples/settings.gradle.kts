@@ -24,6 +24,7 @@ includeBuild("build-logic")
 includeBuild("../")
 
 include("browser")
+include("csstype-only")
 include("event-flow")
 include("export-suspend-with-cancellation")
 include("mdn-audioworklet-example")
